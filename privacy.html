@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy &amp; Terms of Use (EULA) — AeBRen</title>
+  <meta name="description" content="Official Terms of Use (EULA) and Privacy Policy for #Gr3y's Advanced eBook ReNamer (AeBRen, com.aebren.app) in English, Russian, and Ukrainian." />
+  <meta property="og:title" content="Privacy Policy &amp; Terms of Use (EULA) — AeBRen" />
+  <meta property="og:description" content="Unified End-User License Agreement (EULA), Terms of Use, and Google Play Data Safety aligned Privacy Policy for AeBRen." />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface-subtle: #edf1f7;
+      --border: rgba(15, 23, 42, 0.09);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text: #111827;
+      --text-secondary: #374151;
+      --text-muted: #5b667a;
+      --accent: #059669;
+      --accent-hover: #047857;
+      --accent-fg: #ffffff;
+      --notice-bg: #f0f5f2;
+      --notice-border: rgba(5, 150, 105, 0.28);
+      --warn-bg: #fdf8ee;
+      --warn-border: rgba(180, 83, 9, 0.28);
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 7px;
+      --max-w: 920px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #181c24;
+        --surface: #202530;
+        --surface-subtle: #272d3a;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.16);
+        --text: #eef2f7;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --accent: #10b981;
+        --accent-hover: #059669;
+        --accent-fg: #052e22;
+        --notice-bg: #1b2824;
+        --notice-border: rgba(16, 185, 129, 0.32);
+        --warn-bg: #2a241b;
+        --warn-border: rgba(245, 158, 11, 0.32);
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.68;
+      letter-spacing: 0.005em;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Bar Contract: 3 zones, single row */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      height: 64px;
+    }
+
+    .brand {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .brand:hover {
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding: 6px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background-color 150ms ease;
+    }
+
+    .header-cta:hover {
+      color: var(--text);
+      background-color: var(--surface-subtle);
+    }
+
+    /* Controls bar (language & document filter) */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 24px 0 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .segmented {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      background-color: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .segmented button {
+      min-height: 36px;
+      padding: 6px 14px;
+      border: 0;
+      border-radius: calc(var(--radius-md) - 4px);
+      background: transparent;
+      color: var(--text-secondary);
+      font: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), color 150ms ease;
+    }
+
+    .segmented button:hover {
+      color: var(--text);
+    }
+
+    .segmented button[aria-pressed="true"] {
+      background-color: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Document wrapper */
+    .doc-article {
+      margin: 28px 0 48px;
+      padding: 36px 40px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .doc-header {
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-header h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.65rem, 3vw, 2.25rem);
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mono {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85em;
+    }
+
+    .notice-box {
+      padding: 16px 18px;
+      margin: 20px 0 28px;
+      background-color: var(--notice-bg);
+      border: 1px solid var(--notice-border);
+      border-radius: var(--radius-md);
+      font-size: 0.925rem;
+      color: var(--text-secondary);
+    }
+
+    .warn-box {
+      padding: 16px 18px;
+      margin: 16px 0;
+      background-color: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      border-radius: var(--radius-md);
+      font-size: 0.9375rem;
+      color: var(--text);
+    }
+
+    .part-divider {
+      margin: 36px 0 22px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .part-divider:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .part-title {
+      margin: 0 0 18px;
+      font-size: 1.25rem;
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .clause {
+      margin-bottom: 26px;
+      max-width: 74ch;
+    }
+
+    .clause h3 {
+      margin: 0 0 10px;
+      font-size: 1.0625rem;
+      line-height: 1.35;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .clause p {
+      margin: 0 0 12px;
+      color: var(--text-secondary);
+    }
+
+    .clause p:last-child {
+      margin-bottom: 0;
+    }
+
+    .clause ul {
+      margin: 8px 0 14px;
+      padding-left: 22px;
+      color: var(--text-secondary);
+    }
+
+    .clause li {
+      margin-bottom: 8px;
+    }
+
+    .site-footer {
+      padding: 0 0 44px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        padding: 0 16px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .doc-article {
+        padding: 24px 20px;
+        margin: 20px 0 36px;
+      }
+    }
+
+    @media print {
+      .site-header, .controls-bar { display: none; }
+      body { background: #fff; color: #000; }
+      .doc-article { border: 0; padding: 0; margin: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html">AeBRen</a>
+      <nav class="nav-links" aria-label="Document navigation">
+        <a href="./index.html" data-i18n-nav="home">Home</a>
+        <a href="#part-privacy" data-i18n-nav="privacy">Privacy Policy</a>
+        <a href="#part-eula" data-i18n-nav="eula">Terms (EULA)</a>
+        <a href="mailto:gr8gr3y@gmail.com" data-i18n-nav="contact">Contact</a>
+      </nav>
+      <a class="header-cta" href="./index.html" data-i18n-nav="back">App Overview</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="controls-bar">
+      <div class="segmented" role="group" aria-label="Language selector">
+        <button type="button" data-lang-btn="en" aria-pressed="true">English</button>
+        <button type="button" data-lang-btn="ru" aria-pressed="false">Русский</button>
+        <button type="button" data-lang-btn="uk" aria-pressed="false">Українська</button>
+      </div>
+      <div class="segmented" role="group" aria-label="Document section filter">
+        <button type="button" data-part-btn="all" aria-pressed="true" data-i18n-part="all">Full Document</button>
+        <button type="button" data-part-btn="privacy" aria-pressed="false" data-i18n-part="privacy">Privacy Policy</button>
+        <button type="button" data-part-btn="eula" aria-pressed="false" data-i18n-part="eula">Terms (EULA)</button>
+      </div>
+    </div>
+
+    <!-- ==================== ENGLISH (Default static HTML) ==================== -->
+    <article class="doc-article" data-lang="en">
+      <header class="doc-header">
+        <h1>Terms of Use (EULA) &amp; Privacy Policy</h1>
+        <div class="doc-meta">
+          <span><strong>Application:</strong> #Gr3y&#39;s Advanced eBook ReNamer (AeBRen)</span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Package:</strong> <span class="mono">com.aebren.app</span></span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Version:</strong> <span class="mono">1.0.0</span></span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Effective Date:</strong> November 22, 2026</span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Developer:</strong> Serhiy Yuzchyshyn (#Gr3y) &middot; <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a></span>
+        </div>
+      </header>
+
+      <div class="notice-box">
+        In the event of any discrepancy between translated versions, the English text shall prevail to the extent permitted by applicable mandatory law.
+      </div>
+
+      <section class="part-divider" data-part="privacy" id="part-privacy">
+        <h2 class="part-title">Part II &middot; Privacy Policy (Google Play Data Safety Aligned)</h2>
+
+        <div class="clause">
+          <h3>9. Local-First Privacy Architecture</h3>
+          <p>Serhiy Yuzchyshyn (#Gr3y) respects your privacy. AeBRen operates on a strict <strong>Local-First</strong> principle: your e-book files, directory trees, annotations, covers, filenames, and selected PDF text or OCR fragments are processed <strong>locally on your device</strong>.</p>
+          <p>The Developer does <strong>not</strong> operate user accounts, does <strong>not</strong> require registration, does <strong>not</strong> collect personal library inventories, and does <strong>not</strong> upload, harvest, sell, or store your books on Developer-controlled servers.</p>
+        </div>
+
+        <div class="clause">
+          <h3>10. Permissions &amp; On-Device Storage</h3>
+          <ul>
+            <li><strong>Storage Access (<span class="mono">READ_EXTERNAL_STORAGE</span>, <span class="mono">WRITE_EXTERNAL_STORAGE</span>, <span class="mono">MANAGE_EXTERNAL_STORAGE</span> / Android SAF):</strong> Used exclusively upon user action to browse folders, read book metadata headers, rename or move files in-place, embed metadata and covers into books, and save user-initiated exports.</li>
+            <li><strong>Local Preferences &amp; Emergency Recovery:</strong> Templates, Regex rules, favorite folders, UI theme, language, and signed Free daily usage counters remain stored locally on your device. Only in the event of a fatal startup crash that prevents the UI from initializing does the Software write a local recovery snapshot (<span class="mono">AeBRen_emergency_settings_backup.json</span>) to your Downloads folder.</li>
+            <li><strong>Local App Integrity &amp; Anti-Tampering Checks:</strong> To protect package integrity and prevent unauthorized modification or repackaging, AeBRen performs strictly local, on-device runtime integrity and digital signature verification within its own application process. No system telemetry, memory maps, process data, or diagnostic reports from these checks are collected, stored externally, or transmitted off your device.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>11. Internet Access &amp; Third-Party Services</h3>
+          <p>The Software requests the <span class="mono">INTERNET</span> permission solely for the following transparent purposes:</p>
+          <ul>
+            <li><strong>User-Initiated Cover &amp; Catalog Search (Pro):</strong> Cover search opens standard search links in your device&#39;s external browser without scraping or downloading third-party cover images inside the app; only image files explicitly selected by you from your device are embedded locally. When you explicitly trigger Bibliographic Lookup in the metadata helper, only your search query terms (title, author, ISBN, DOI, or short bibliographic citation) are sent to public bibliographic APIs (Open Library, Crossref, Wikidata &mdash; plus optional Internet Archive, Library of Congress SRU, Deutsche Nationalbibliothek SRU, OpenAlex, or custom SRU/OAI-PMH gateways when connected to a compatible server proxy), subject to their privacy policies. When triggering fragment OCR for a language not yet cached locally, Tesseract.js may download the corresponding OCR language pack on demand.</li>
+            <li><strong>Advertising in Free Tier Only (Google AdMob &amp; UMP):</strong> In the Free tier, <span class="mono">com.aebren.app</span> integrates the <strong>Google Mobile Ads (AdMob) SDK</strong> (<span class="mono">play-services-ads</span>) and <strong>Google User Messaging Platform (UMP) SDK</strong> to display banner and interstitial ads and manage regional consent (GDPR/CCPA). Google may automatically collect and process device identifiers (such as Advertising ID), approximate IP-based location, diagnostics, and ad interaction metrics in accordance with <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google&#39;s Privacy Policy</a> and your consent settings. When Pro access is unlocked via Google Play Billing, ad display and ad requests are disabled.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>12. Data Retention, Children&#39;s Privacy &amp; Contact</h3>
+          <ul>
+            <li><strong>Retention &amp; Deletion:</strong> Because no central user databases exist, clearing app data or uninstalling AeBRen permanently erases all local preferences, templates, and counters from your device (except files you explicitly exported to Downloads).</li>
+            <li><strong>Children&#39;s Privacy:</strong> The Software is a general utility not directed to children under 13 (or the applicable age of digital consent in your jurisdiction), and the Developer does not knowingly collect personal data from children.</li>
+            <li><strong>Policy Updates &amp; Contact:</strong> We may update this unified Agreement alongside app updates; the current version is always accessible in the app&#39;s &ldquo;About&rdquo; menu and on this page. For legal, licensing, copyright, or privacy inquiries, contact: <strong>Serhiy Yuzchyshyn (#Gr3y)</strong> &mdash; <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="part-divider" data-part="eula" id="part-eula">
+        <h2 class="part-title">Part I &middot; End-User License Agreement (EULA) &amp; Terms of Use</h2>
+
+        <div class="clause">
+          <h3>1. Agreement, Parties &amp; Scope</h3>
+          <p>This unified End-User License Agreement (&ldquo;EULA&rdquo;), Terms of Use, and Privacy Policy (&ldquo;Agreement&rdquo;) is a legally binding contract between you (&ldquo;User&rdquo;) and <strong>Serhiy Yuzchyshyn</strong>, operating as <strong>#Gr3y</strong> (&ldquo;Developer&rdquo;, <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>). It governs your installation and use of <strong>#Gr3y&#39;s Advanced eBook ReNamer (AeBRen)</strong> (<span class="mono">com.aebren.app</span>), including its Free tier and optional Pro in-app unlock, and all associated native libraries, assets, documentation, and updates (&ldquo;Software&rdquo;).</p>
+          <p>By downloading, installing, launching, or using the Software, you confirm that you have legal capacity to enter into this Agreement (or parent/guardian consent) and accept its terms unconditionally.</p>
+        </div>
+
+        <div class="clause">
+          <h3>2. Limited License Grant</h3>
+          <p>Subject to strict compliance with this Agreement, the Developer grants you a limited, non-exclusive, non-transferable, non-sublicensable, and revocable license to use the Software solely for personal or internal library cataloging on Android devices owned or lawfully controlled by you. The Software is licensed, not sold.</p>
+        </div>
+
+        <div class="clause">
+          <h3>3. Intellectual Property Rights &amp; Third-Party Notices</h3>
+          <p>All right, title, and interest in the Developer&#39;s original components of the Software&mdash;specifically original TypeScript/JavaScript application code, native C++/JNI modules authored for AeBRen, cryptographic integrity logic, Soft-Touch UI/UX theme stylesheets, original app icons, developer logos, trademarks (<span class="mono">#Gr3y</span>, <span class="mono">AeBRen</span>, <span class="mono">Advanced eBook ReNamer</span>), the conditional <span class="mono">if()</span> AST template engine, format parsers, metadata writers, and original documentation, <strong>expressly excluding all third-party libraries, frameworks, UI icon sets, and SDKs</strong>&mdash;belong exclusively to <strong>Serhiy Yuzchyshyn (#Gr3y)</strong> and are protected by international copyright and intellectual property laws.</p>
+          <p>Third-party open-source software and SDKs bundled with or linked by the Software are <strong>not</strong> claimed under the Developer&#39;s copyright and remain the exclusive property of their respective authors under their own licenses:</p>
+          <ul>
+            <li>React &amp; React DOM &mdash; MIT License (Meta Platforms, Inc.)</li>
+            <li>Capacitor (<span class="mono">@capacitor/core</span>, <span class="mono">@capacitor/android</span>) &mdash; MIT License (Ionic Team)</li>
+            <li>Tailwind CSS &mdash; MIT License (Tailwind Labs, Inc.)</li>
+            <li>Motion &mdash; MIT License (Matt Perry)</li>
+            <li>PDF.js (<span class="mono">pdfjs-dist</span>) &mdash; Apache-2.0 License (Mozilla Foundation)</li>
+            <li>Tesseract.js &mdash; Apache-2.0 License (Tesseract.js Contributors / Tesseract OCR)</li>
+            <li>JSZip &mdash; elected and used strictly under the MIT License (Stuart Knightley)</li>
+            <li>pdf-lib &mdash; MIT License (Andrew Dillon)</li>
+            <li>Lucide Icons (<span class="mono">lucide-react</span>) &mdash; ISC License (Lucide Contributors)</li>
+            <li>AndroidX &amp; Kotlin Standard Library &mdash; Apache-2.0 License (Google / AOSP / JetBrains)</li>
+            <li>zlib &mdash; zlib License (Jean-loup Gailly &amp; Mark Adler)</li>
+            <li>Google Mobile Ads SDK &amp; Google User Messaging Platform (UMP) SDK <em>(Free tier only)</em> &mdash; Google APIs Terms of Service (Google LLC)</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>4. Anti-Tampering, Anti-Circumvention &amp; Prohibited Conduct</h3>
+          <p>To protect the Developer&#39;s intellectual property, product integrity, and sustainable monetization, you expressly agree <strong>NOT</strong> to:</p>
+          <ul>
+            <li>Decompile, disassemble, reverse-engineer, decrypt, or extract source code, obfuscated logic, signing pins, or native security keys (except where strictly permitted by mandatory law after prior written notice to the Developer).</li>
+            <li>Modify, patch, re-sign, repackage, clone, or redistribute modified APK/AAB bundles, DEX code, web assets, or <span class="mono">.so</span> libraries.</li>
+            <li>Bypass, disable, forge, or tamper with Free-edition daily quotas (20 renamed files/day), edition checks, digital signature verification, or Pro-feature locks.</li>
+            <li>Use ad blockers, modified <span class="mono">hosts</span> files, Private DNS ad filtering, VPN ad-blockers, or patched builds to block, hide, or spoof Google AdMob banners or interstitials in the Free edition. The Software may actively check ad-delivery readiness and refuse to execute monetized operations if blocking or tampering is detected.</li>
+            <li>Rent, lease, lend, sell, resell, sublicense, or commercially exploit the Software as a competing product or service without prior written consent.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>5. Free Tier, Pro In-App Unlock, Subscriptions &amp; Updates</h3>
+          <ul>
+            <li><strong>Free Tier (<span class="mono">com.aebren.app</span>):</strong> Ad-supported (Google AdMob), capped at 20 renamed files per day, light Soft-Touch themes, built-in file manager, metadata editing, and core template tags.</li>
+            <li><strong>Pro Access (In-App Purchase via Google Play Billing inside <span class="mono">com.aebren.app</span>):</strong> Available as a one-time payment for lifetime access and/or a recurring subscription (monthly or annual, auto-renewing unless canceled in Google Play settings before the end of the current billing period); disables advertising inside the Software and removes daily limits, enabling all dark &amp; light themes, extended template tags, folder auto-sorting, book content &amp; PDF metadata helper (text/graphic selection, fragment OCR, open-catalog lookup), cover search/replacement, and JSON backup/restore.</li>
+            <li>Billing, subscription renewals, cancellations, taxes, and refunds are managed solely by Google Play under Google Play Terms of Service. The Developer does not process or store payment card details and may update features or discontinue third-party catalog integrations at any time without liability.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>6. User Files, DRM Policy &amp; Backup Responsibility</h3>
+          <p>You warrant that you hold lawful rights to all files processed with the Software. AeBRen <strong>never</strong> bypasses or removes Digital Rights Management (DRM); DRM-protected files are automatically skipped or left read-only.</p>
+          <div class="warn-box">
+            <strong>Critical Storage Notice:</strong> AeBRen performs direct in-place renaming, directory restructuring, user-confirmed conflict overwriting, and binary/XML container writing (FB2, FB3, EPUB, KEPUB, MOBI, AZW3, unencrypted AZW8/KFX, PDF, Markdown; DjVu remains read-only). Hardware faults, power loss, OS permission revocation, corrupted source files, or user Regex/template rules can permanently alter files. <strong>You are solely responsible for maintaining verified backups prior to batch operations.</strong>
+          </div>
+        </div>
+
+        <div class="clause">
+          <h3>7. Disclaimer of Warranties &amp; Limitation of Liability</h3>
+          <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND (EXPRESS, IMPLIED, OR STATUTORY), INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, DATA ACCURACY, OR NON-INFRINGEMENT.</p>
+          <p>IN NO EVENT SHALL THE DEVELOPER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF DATA, BOOKS, METADATA, OR PROFITS. THE DEVELOPER&#39;S TOTAL AGGREGATE LIABILITY FOR ALL CLAIMS SHALL NOT EXCEED THE AMOUNT ACTUALLY PAID BY YOU FOR THE SOFTWARE IN THE PRECEDING 12 MONTHS (OR ZERO / MINIMUM PERMITTED BY LAW FOR THE FREE EDITION).</p>
+        </div>
+
+        <div class="clause">
+          <h3>8. Termination, Localizations &amp; Governing Interpretation</h3>
+          <p>Breach of this Agreement (especially Section 4) immediately terminates your license without notice, requiring immediate uninstallation.</p>
+          <p><strong>Localization &amp; Machine Translation Notice:</strong> Official localizations maintained directly by the Developer are <strong>Ukrainian (<span class="mono">uk</span>)</strong>, <strong>Russian (<span class="mono">ru</span>)</strong>, and <strong>English (US) (<span class="mono">en-US</span>)</strong>, as well as any future localization that explicitly credits a human translator author. All other currently bundled localizations (German, Spanish, French, Portuguese, Japanese, Simplified Chinese, and Traditional Chinese) were created with the help of machine translation and may contain inaccuracies or errors. We sincerely apologize for any translation imperfections in those languages. Once a specific translator author is credited for a localization, it moves to the official list and no longer requires this disclaimer.</p>
+        </div>
+      </section>
+    </article>
+
+    <!-- ==================== RUSSIAN ==================== -->
+    <article class="doc-article" data-lang="ru" hidden>
+      <header class="doc-header">
+        <h1>Условия использования (EULA) и Политика конфиденциальности</h1>
+        <div class="doc-meta">
+          <span><strong>Приложение:</strong> #Gr3y&#39;s Advanced eBook ReNamer (AeBRen)</span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Пакет:</strong> <span class="mono">com.aebren.app</span></span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Версия:</strong> <span class="mono">1.0.0</span></span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Дата вступления в силу:</strong> 22 ноября 2026</span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Разработчик:</strong> Serhiy Yuzchyshyn (#Gr3y) &middot; <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a></span>
+        </div>
+      </header>
+
+      <div class="notice-box">
+        При наличии любых расхождений между переводами приоритет имеет английский текст соглашения в пределах, допускаемых применимым императивным законодательством.
+      </div>
+
+      <section class="part-divider" data-part="privacy">
+        <h2 class="part-title">Часть II &middot; Политика конфиденциальности (Google Play Data Safety)</h2>
+
+        <div class="clause">
+          <h3>9. Локальная обработка данных (Local-First)</h3>
+          <p>Serhiy Yuzchyshyn (#Gr3y) уважает вашу приватность. AeBRen построено по строгому принципу <strong>Local-First</strong>: ваши электронные книги, структура папок, имена файлов, аннотации, обложки, текстовые слои и выделенные фрагменты страниц PDF/OCR обрабатываются <strong>локально на вашем устройстве</strong>.</p>
+          <p>Разработчик <strong>не</strong> требует регистрации аккаунтов, <strong>не</strong> ведёт облачных баз ваших библиотек и <strong>не</strong> передаёт содержимое ваших книг на собственные серверы.</p>
+        </div>
+
+        <div class="clause">
+          <h3>10. Разрешения устройства и локальное хранение настроек</h3>
+          <ul>
+            <li><strong>Доступ к хранилищу (<span class="mono">READ_EXTERNAL_STORAGE</span>, <span class="mono">WRITE_EXTERNAL_STORAGE</span>, <span class="mono">MANAGE_EXTERNAL_STORAGE</span> / Android SAF):</strong> используется исключительно по инициативе Пользователя для обзора каталогов, чтения тегов книг, переименования или перемещения файлов на месте, записи метаданных и обложек и сохранения экспортируемых настроек.</li>
+            <li><strong>Локальные настройки и аварийное резервирование:</strong> шаблоны, правила Regex, избранные папки, выбранная тема, язык интерфейса и защищённый подписью счётчик дневного лимита Free-режима хранятся локально на устройстве. Только при критическом сбое запуска, не позволяющем открыть интерфейс, Приложение сохраняет локальный файл восстановления (<span class="mono">AeBRen_emergency_settings_backup.json</span>) в папку «Загрузки» устройства.</li>
+            <li><strong>Локальная проверка целостности среды выполнения:</strong> для защиты от модификации и переупаковки AeBRen выполняет локальные проверки цифровой подписи и целостности исключительно в рамках собственного процесса на устройстве. Никакая системная телеметрия, карты памяти или диагностические данные этих проверок не собираются и не передаются за пределы устройства.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>11. Сетевые запросы и сторонние сервисы</h3>
+          <p>Разрешение <span class="mono">INTERNET</span> используется строго для следующих целей:</p>
+          <ul>
+            <li><strong>Поиск обложек и библиографических данных (по запросу Пользователя в Pro):</strong> поиск обложек открывает стандартный поисковый запрос во внешнем браузере устройства без фонового скачивания сторонних изображений внутри Приложения &mdash; в книгу встраиваются только изображения, выбранные вами локально с устройства. При нажатии поиска сведений об издании в помощнике метаданных отправляются только текстовые поисковые параметры (название, автор, ISBN, DOI или короткая библиографическая строка) к открытым библиографическим каталогам (Open Library, Crossref, Wikidata, а также Internet Archive, Library of Congress SRU, Deutsche Nationalbibliothek SRU, OpenAlex или настраиваемому SRU/OAI-PMH при наличии совместимого прокси). При запуске OCR фрагмента для языка, отсутствующего в кэше, Tesseract.js может загрузить языковой пакет по запросу.</li>
+            <li><strong>Реклама только в бесплатном режиме (Google AdMob и UMP):</strong> в бесплатном режиме <span class="mono">com.aebren.app</span> использует <strong>Google Mobile Ads SDK (AdMob)</strong> и <strong>Google User Messaging Platform (UMP) SDK</strong> для показа баннеров и межстраничных объявлений и управления региональным согласием (GDPR/CCPA). Google может обрабатывать рекламный идентификатор (Advertising ID), примерное местоположение по IP-адресу, диагностику и события взаимодействия с рекламой согласно <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Политике конфиденциальности Google</a> и вашим настройкам согласия. При активации Pro-доступа через Google Play Billing показ и запросы рекламы отключаются.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>12. Хранение данных, защита детей и контакты</h3>
+          <ul>
+            <li><strong>Удаление данных:</strong> поскольку Разработчик не хранит персональные данные на серверах, очистка данных приложения или его удаление полностью удаляет все локальные настройки и счётчики с устройства (кроме файлов, сохранённых вами в папку «Загрузки»).</li>
+            <li><strong>Конфиденциальность детей:</strong> Приложение не предназначено для детей младше 13 лет (или иного минимального возраста цифрового согласия по закону вашей страны), и Разработчик сознательно не собирает их данные.</li>
+            <li><strong>Обновления и связь с разработчиком:</strong> актуальная редакция Соглашения всегда доступна в меню «О приложении» и на этой странице. По вопросам лицензирования, авторских прав и конфиденциальности обращайтесь: <strong>Serhiy Yuzchyshyn (#Gr3y)</strong> &mdash; <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="part-divider" data-part="eula">
+        <h2 class="part-title">Часть I &middot; Лицензионное соглашение (EULA) и Условия использования</h2>
+
+        <div class="clause">
+          <h3>1. Стороны, предмет и принятие условий</h3>
+          <p>Настоящий единый документ &mdash; Лицензионное соглашение с конечным пользователем (EULA), Условия использования и Политика конфиденциальности («Соглашение») &mdash; является юридически обязывающим договором между вами («Пользователь») и разработчиком <strong>Serhiy Yuzchyshyn</strong>, выступающим под псевдонимом <strong>#Gr3y</strong> («Разработчик», <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>).</p>
+          <p>Соглашение регулирует загрузку, установку, запуск и использование <strong>#Gr3y&#39;s Advanced eBook ReNamer (AeBRen)</strong> (<span class="mono">com.aebren.app</span>), включая бесплатный режим и опциональный Pro-доступ, а также всех нативных библиотек, документации и обновлений («Приложение»). Устанавливая или используя Приложение, вы подтверждаете дееспособность (или согласие законных представителей) и безоговорочно принимаете эти условия.</p>
+        </div>
+
+        <div class="clause">
+          <h3>2. Предоставление ограниченной лицензии</h3>
+          <p>При соблюдении всех положений Соглашения Разработчик предоставляет вам ограниченную, неисключительную, непередаваемую, не подлежащую сублицензированию и отзывную лицензию на использование Приложения исключительно для личной или внутренней каталогизации электронных книг на принадлежащих вам устройствах Android. Приложение предоставляется по лицензии, а не продаётся.</p>
+        </div>
+
+        <div class="clause">
+          <h3>3. Интеллектуальная собственность и сторонние компоненты</h3>
+          <p>Исключительные права на оригинальные компоненты Приложения, созданные Разработчиком &mdash; оригинальный код TypeScript/JavaScript, собственные нативные модули C++/JNI, логику проверки целостности, стили оформления Soft-Touch UI/UX, оригинальные иконки приложения, логотипы и обозначения (<span class="mono">#Gr3y</span>, <span class="mono">AeBRen</span>, <span class="mono">Advanced eBook ReNamer</span>), движок условных формул <span class="mono">if()</span>, парсеры форматов, модули записи метаданных и документацию, <strong>за прямым исключением всех сторонних библиотек, фреймворков, наборов UI-иконок и SDK</strong> &mdash; принадлежат исключительно <strong>Serhiy Yuzchyshyn (#Gr3y)</strong>.</p>
+          <p>Сторонние компоненты с открытым исходным кодом и SDK не включаются в копирайт Разработчика и остаются собственностью их правообладателей по своим лицензиям: React и React DOM (MIT), Capacitor (MIT), Tailwind CSS (MIT), Motion (MIT), PDF.js (Apache-2.0), Tesseract.js (Apache-2.0), JSZip (используется строго по лицензии MIT), pdf-lib (MIT), Lucide Icons (ISC), AndroidX и Kotlin stdlib (Apache-2.0), zlib (zlib License), а в бесплатном режиме &mdash; Google Mobile Ads SDK и Google UMP SDK (условия Google APIs).</p>
+        </div>
+
+        <div class="clause">
+          <h3>4. Защита от взлома, модификации и обхода ограничений</h3>
+          <p>Пользователю строго <strong>запрещается</strong> прямо или косвенно:</p>
+          <ul>
+            <li>Декомпилировать, дизассемблировать, подвергать обратному инжинирингу, расшифровывать или извлекать исходный код, обфусцированную логику, криптографические ключи и отпечатки подписи (кроме случаев, прямо разрешённых императивным законом после письменного уведомления Разработчика).</li>
+            <li>Модифицировать, патчить, переподписывать, перепаковывать, клонировать или распространять APK/AAB, байткод DEX, веб-ресурсы или библиотеки <span class="mono">.so</span>.</li>
+            <li>Обходить, отключать, подделывать или взламывать суточный лимит бесплатной версии (20 переименований в день), проверку редакции, проверку цифровой подписи или ограничения Pro-функций.</li>
+            <li>Использовать блокировщики рекламы, модифицированные файлы <span class="mono">hosts</span>, Private DNS с фильтрацией рекламы, VPN-блокировщики или пропатченные сборки для подавления показа рекламы Google AdMob в бесплатной версии. Приложение вправе проверять готовность рекламной монетизации и блокировать выполнение операций при обнаружении вмешательства.</li>
+            <li>Сдавать в аренду, продавать, перепродавать, сублицензировать или коммерчески эксплуатировать Приложение как конкурирующий сервис без письменного разрешения Разработчика.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>5. Бесплатная (Free) и Pro-версия: подписка, пожизненный доступ и обновления</h3>
+          <ul>
+            <li><strong>Бесплатный режим (<span class="mono">com.aebren.app</span>):</strong> поддержка рекламы Google AdMob, дневной лимит 20 переименований, светлые темы Soft-Touch, встроенный файл-менеджер, редактор метаданных и базовые теги шаблона.</li>
+            <li><strong>Pro-доступ (через Google Play Billing внутри <span class="mono">com.aebren.app</span>):</strong> одноразовая оплата пожизненного доступа и/или возобновляемая подписка (месячная или годовая с автопродлением до отмены в настройках Google Play); отключает рекламу и лимиты, открывает все тёмные и светлые темы, расширенные теги, автосортировку по папкам, помощник разбора книг и PDF (текстовое/графическое выделение, OCR фрагмента, открытые каталоги), поиск/замену обложек и экспорт/импорт настроек JSON.</li>
+            <li>Оплата, продление, отмена, налоги и возврат средств осуществляются исключительно через Google Play. Разработчик не собирает и не хранит платёжные данные Пользователя.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>6. Файлы пользователя, DRM и ответственность за резервные копии</h3>
+          <p>Пользователь гарантирует наличие законных прав на все обрабатываемые файлы. Приложение <strong>не</strong> предназначено для обхода или снятия DRM-защиты: защищённые DRM файлы пропускаются или остаются в режиме «только чтение».</p>
+          <div class="warn-box">
+            <strong>Важное предупреждение о работе с памятью:</strong> AeBRen выполняет прямое переименование файлов и папок на месте, перезапись при разрешении конфликтов (по выбору Пользователя) и модификацию внутренних контейнеров метаданных (FB2, FB3, EPUB, KEPUB, MOBI, AZW3, незашифрованных AZW8/KFX, PDF, Markdown; DjVu остаётся только для чтения). Сбои накопителя, отключение питания, отзыв разрешений ОС, повреждённые файлы или ошибки в пользовательских правилах RegEx/шаблонах могут необратимо изменить данные. <strong>Вы несёте исключительную ответственность за создание резервных копий перед пакетными операциями.</strong>
+          </div>
+        </div>
+
+        <div class="clause">
+          <h3>7. Отказ от гарантий и ограничение ответственности</h3>
+          <p>В МАКСИМАЛЬНОЙ СТЕПЕНИ, ДОПУСКАЕМОЙ ЗАКОНОМ, ПРИЛОЖЕНИЕ ПРЕДОСТАВЛЯЕТСЯ НА УСЛОВИЯХ «КАК ЕСТЬ» (AS IS) И «ПО МЕРЕ ДОСТУПНОСТИ» (AS AVAILABLE) БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ.</p>
+          <p>РАЗРАБОТЧИК НЕ НЕСЁТ ОТВЕТСТВЕННОСТИ ЗА ЛЮБЫЕ КОСВЕННЫЕ, СЛУЧАЙНЫЕ, ШТРАФНЫЕ ИЛИ ПОСЛЕДУЮЩИЕ УБЫТКИ, УТЕРЮ ФАЙЛОВ, МЕТАДАННЫХ ИЛИ ПРИБЫЛИ. СОВОКУПНАЯ ОТВЕТСТВЕННОСТЬ РАЗРАБОТЧИКА ОГРАНИЧИВАЕТСЯ СУММОЙ, ФАКТИЧЕСКИ УПЛАЧЕННОЙ ВАМИ ЗА ПРИЛОЖЕНИЕ В ТЕЧЕНИЕ ПОСЛЕДНИХ 12 МЕСЯЦЕВ (ДЛЯ БЕСПЛАТНОЙ ВЕРСИИ &mdash; НУЛЕМ ЛИБО МИНИМАЛЬНО ДОПУСТИМЫМ ЗАКОНОМ ПРЕДЕЛОМ).</p>
+        </div>
+
+        <div class="clause">
+          <h3>8. Прекращение действия и уведомление о локализациях</h3>
+          <p>При нарушении условий Соглашения (особенно раздела 4) лицензия немедленно прекращается без уведомления, и все копии Приложения подлежат удалению.</p>
+          <p><strong>О локализациях и машинном переводе:</strong> официальными локализациями, поддерживаемыми непосредственно Разработчиком, являются <strong>украинская (<span class="mono">uk</span>)</strong>, <strong>русская (<span class="mono">ru</span>)</strong> и <strong>английская США (<span class="mono">en-US</span>)</strong>, а также любая будущая локализация с указанием конкретного автора перевода. Остальные встроенные локализации (немецкая, испанская, французская, португальская, японская, китайская упрощённая и традиционная) созданы с помощью машинного перевода и могут содержать неточности или ошибки &mdash; мы приносим извинения за возможные огрехи перевода.</p>
+        </div>
+      </section>
+    </article>
+
+    <!-- ==================== UKRAINIAN ==================== -->
+    <article class="doc-article" data-lang="uk" hidden>
+      <header class="doc-header">
+        <h1>Умови використання (EULA) та Політика конфіденційності</h1>
+        <div class="doc-meta">
+          <span><strong>Застосунок:</strong> #Gr3y&#39;s Advanced eBook ReNamer (AeBRen)</span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Пакет:</strong> <span class="mono">com.aebren.app</span></span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Версія:</strong> <span class="mono">1.0.0</span></span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Дата набуття чинності:</strong> 22 листопада 2026</span>
+          <span aria-hidden="true">&middot;</span>
+          <span><strong>Розробник:</strong> Serhiy Yuzchyshyn (#Gr3y) &middot; <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a></span>
+        </div>
+      </header>
+
+      <div class="notice-box">
+        У разі розбіжностей між перекладами переважну силу має англомовний текст у межах, дозволених чинним імперативним законодавством.
+      </div>
+
+      <section class="part-divider" data-part="privacy">
+        <h2 class="part-title">Частина II &middot; Політика конфіденційності (Google Play Data Safety)</h2>
+
+        <div class="clause">
+          <h3>9. Локальна обробка даних (Local-First)</h3>
+          <p>Serhiy Yuzchyshyn (#Gr3y) поважає вашу приватність. AeBRen працює за суворим принципом <strong>Local-First</strong>: ваші книги, імена файлів, теки, анотації, обкладинки й вибрані фрагменти PDF/OCR обробляються <strong>локально на вашому пристрої</strong>.</p>
+          <p>Розробник <strong>не</strong> створює облікових записів, <strong>не</strong> вимагає реєстрації та <strong>не</strong> завантажує вашу бібліотеку на власні сервери.</p>
+        </div>
+
+        <div class="clause">
+          <h3>10. Дозволи пристрою та локальні дані</h3>
+          <ul>
+            <li><strong>Доступ до сховища (<span class="mono">READ_EXTERNAL_STORAGE</span>, <span class="mono">WRITE_EXTERNAL_STORAGE</span>, <span class="mono">MANAGE_EXTERNAL_STORAGE</span> / Android SAF):</strong> використовується виключно за командою Користувача для перегляду тек, читання тегів, перейменування або переміщення файлів на місці, запису метаданих/обкладинок і збереження експортованих налаштувань.</li>
+            <li><strong>Локальні налаштування та аварійний бекап:</strong> шаблони, правила Regex, обрані теки, тема, мова й підписаний лічильник денного ліміту Free зберігаються локально на пристрої. Лише при критичному збої запуску файл відновлення налаштувань (<span class="mono">AeBRen_emergency_settings_backup.json</span>) може бути локально збережений у теку «Завантаження».</li>
+            <li><strong>Локальна перевірка цілісності середовища виконання:</strong> для захисту від модифікації та перепакування AeBRen виконує перевірки цифрового підпису й цілісності виключно локально в межах власного процесу на пристрої без збору чи передавання будь-якої системної телеметрії.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>11. Інтернет і сторонні сервіси</h3>
+          <p>Дозвіл <span class="mono">INTERNET</span> використовується суворо для таких прозорих цілей:</p>
+          <ul>
+            <li><strong>Пошук обкладинок і відкритих каталогів (за запитом Користувача у Pro):</strong> пошук обкладинок відкриває стандартні посилання у зовнішньому браузері пристрою без фонового завантаження сторонніх зображень у Застосунку &mdash; в книгу додаються лише файли, обрані вами локально. Під час бібліографічного пошуку в помічнику метаданих передаються лише текстові параметри (назва, автор, ISBN, DOI або коротке цитування) до публічних каталогів (Open Library, Crossref, Wikidata, а також Internet Archive, Library of Congress SRU, Deutsche Nationalbibliothek SRU, OpenAlex або власного шлюзу SRU/OAI-PMH за наявності сумісного проксі). Під час OCR фрагмента Tesseract.js за потреби завантажує відсутній мовний пакет.</li>
+            <li><strong>Реклама лише у безкоштовному режимі (Google AdMob та UMP):</strong> у режимі Free пакет <span class="mono">com.aebren.app</span> використовує <strong>Google Mobile Ads SDK (AdMob)</strong> і <strong>Google User Messaging Platform (UMP) SDK</strong> для показу реклами та керування регіональною згодою (GDPR/CCPA). Google може обробляти рекламний ID, приблизне розташування за IP, діагностику та взаємодії з рекламою згідно з <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Політикою конфіденційності Google</a> та налаштуваннями згоди. Після розблокування Pro через Google Play Billing показ і запити реклами вимикаються.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>12. Видалення даних, захист дітей і контакти</h3>
+          <ul>
+            <li><strong>Зберігання та видалення:</strong> оскільки централізовані бази користувачів відсутні, очищення даних або видалення Застосунку повністю прибирає всі локальні налаштування й лічильники з пристрою (крім файлів, збережених вами у «Завантаження»).</li>
+            <li><strong>Конфіденційність дітей:</strong> Застосунок не призначений для дітей до 13 років (або відповідного віку цифрової згоди у вашій країні), і Розробник свідомо не збирає їхні дані.</li>
+            <li><strong>Контакти:</strong> з усіх правових питань, питань ліцензування, авторських прав і конфіденційності звертайтеся: <strong>Serhiy Yuzchyshyn (#Gr3y)</strong> &mdash; <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="part-divider" data-part="eula">
+        <h2 class="part-title">Частина I &middot; Ліцензійна угода (EULA) та Умови використання</h2>
+
+        <div class="clause">
+          <h3>1. Сторони, предмет і прийняття умов</h3>
+          <p>Цей єдиний документ &mdash; Ліцензійна угода кінцевого користувача (EULA), Умови використання та Політика конфіденційності («Угода») &mdash; є юридично обов&#39;язковим договором між вами («Користувач») і розробником <strong>Serhiy Yuzchyshyn</strong>, який діє під брендом <strong>#Gr3y</strong> («Розробник», <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>).</p>
+          <p>Угода регулює завантаження, встановлення та використання <strong>#Gr3y&#39;s Advanced eBook ReNamer (AeBRen)</strong> (<span class="mono">com.aebren.app</span>), включно з режимом Free та опціональним Pro-доступом, а також усіх вбудованих модулів, нативних бібліотек, документації й оновлень («Застосунок»).</p>
+        </div>
+
+        <div class="clause">
+          <h3>2. Надання обмеженої ліцензії</h3>
+          <p>За умови дотримання цієї Угоди Розробник надає вам обмежену, невиключну, непередавану та відкличну ліцензію на використання Застосунку виключно для особистої або внутрішньої каталогізації електронних книг на належних вам пристроях Android. Застосунок ліцензується, а не продається.</p>
+        </div>
+
+        <div class="clause">
+          <h3>3. Інтелектуальна власність і сторонні компоненти</h3>
+          <p>Виключні права на оригінальні компоненти Застосунку, створені Розробником &mdash; оригінальний код TypeScript/JavaScript, власні нативні модулі C++/JNI, механізми перевірки цілісності, стилі інтерфейсу Soft-Touch, авторські іконки, логотипи та позначення (<span class="mono">#Gr3y</span>, <span class="mono">AeBRen</span>), рушій умовних формул <span class="mono">if()</span>, парсери форматів і модулі запису метаданих, <strong>за прямим винятком усіх сторонніх бібліотек, фреймворків, наборів UI-іконок та SDK</strong> &mdash; належать виключно <strong>Serhiy Yuzchyshyn (#Gr3y)</strong>.</p>
+          <p>Сторонні компоненти з відкритим кодом та SDK не охоплюються копірайтом Розробника й залишаються власністю їхніх правовласників за власними ліцензіями: React і React DOM (MIT), Capacitor (MIT), Tailwind CSS (MIT), Motion (MIT), PDF.js (Apache-2.0), Tesseract.js (Apache-2.0), JSZip (використовується суворо за ліцензією MIT), pdf-lib (MIT), Lucide Icons (ISC), AndroidX та Kotlin stdlib (Apache-2.0), zlib (zlib License), а у Free-версії &mdash; Google Mobile Ads та UMP SDK (умови Google APIs).</p>
+        </div>
+
+        <div class="clause">
+          <h3>4. Захист від злому, модифікації та обходу обмежень</h3>
+          <p>Користувачу суворо <strong>забороняється</strong>:</p>
+          <ul>
+            <li>Декомпілювати, дизасемблювати, здійснювати зворотну розробку, розшифровувати чи видобувати вихідний код, ключі підпису або нативні модулі Застосунку.</li>
+            <li>Змінювати, перепідписувати, перепаковувати, клонувати або розповсюджувати модифіковані APK/AAB, DEX чи бібліотеки <span class="mono">.so</span>.</li>
+            <li>Обходити або підробляти денний ліміт Free-версії (20 файлів/день), перевірки видання, цифрову верифікацію підпису чи обмеження Pro-функцій.</li>
+            <li>Застосовувати блокувальники реклами, модифіковані файли <span class="mono">hosts</span>, Private DNS із фільтрацією реклами чи пропатчені збірки для приховування реклами Google AdMob у Free-версії. Застосунок може перевіряти коректність рекламної монетизації й блокувати виконання дій у разі втручання.</li>
+            <li>Здавати в оренду, продавати, субліцензувати або комерційно використовувати Застосунок як конкуруючий продукт без письмової згоди Розробника.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>5. Версії Free та Pro: підписка, довічний доступ і оновлення</h3>
+          <ul>
+            <li><strong>Режим Free (<span class="mono">com.aebren.app</span>):</strong> містить рекламу Google AdMob та ліміт 20 перейменувань на добу зі світлими темами й базовими полями шаблону.</li>
+            <li><strong>Доступ Pro (через Google Play Billing усередині <span class="mono">com.aebren.app</span>):</strong> надається на вибір Користувача за одноразовою оплатою довічного доступу та/або за підпискою (місячною чи річною з автоподовженням до скасування в налаштуваннях Google Play); повністю вимикає рекламу й ліміти, відкриваючи темні теми, всі поля шаблонів, автосортування у теки, помічник метаданих книг і PDF (виділення тексту/області, OCR фрагмента, відкриті каталоги), пошук/заміну обкладинок і резервування JSON.</li>
+            <li>Оплата, керування підпискою, податки й повернення коштів обробляються виключно через Google Play за правилами Google Play.</li>
+          </ul>
+        </div>
+
+        <div class="clause">
+          <h3>6. Файли користувача, DRM і резервні копії</h3>
+          <p>Користувач гарантує законність прав на оброблювані файли. Застосунок <strong>не</strong> знімає і не обходить DRM-захист.</p>
+          <div class="warn-box">
+            <strong>Критичне попередження:</strong> AeBRen виконує пряме перейменування на диску, перезапис конфліктів (за вибором Користувача) та редагування контейнерів метаданих (FB2, FB3, EPUB, KEPUB, MOBI, AZW3, незашифровані AZW8/KFX, PDF, Markdown; DjVu залишається лише для читання). Збої живлення/носія або помилки формул можуть змінити чи пошкодити файли. <strong>Користувач несе повну відповідальність за створення резервних копій перед масовими операціями.</strong>
+          </div>
+        </div>
+
+        <div class="clause">
+          <h3>7. Відмова від гарантій і обмеження відповідальності</h3>
+          <p>ЗАСТОСУНОК НАДАЄТЬСЯ «ЯК Є» (AS IS) БЕЗ ЖОДНИХ ПРЯМИХ АБО НЕПРЯМИХ ГАРАНТІЙ.</p>
+          <p>РОЗРОБНИК НЕ НЕСЕ ВІДПОВІДАЛЬНОСТІ ЗА БУДЬ-ЯКУ ВТРАТУ ДАНИХ, КНИГ, МЕТАДАНИХ ЧИ НЕПРЯМІ ЗБИТКИ. СУКУПНА ВІДПОВІДАЛЬНІСТЬ ОБМЕЖУЄТЬСЯ СУМОЮ, СПЛАЧЕНОЮ ЗА ЗАСТОСУНОК ПРОТЯГОМ ОСТАННІХ 12 МІСЯЦІВ (ДЛЯ БЕЗКОШТОВНОЇ ВЕРСІЇ &mdash; НУЛЕМ АБО МІНІМАЛЬНО ДОПУСТИМОЮ ЗАКОНОМ МЕЖЕЮ).</p>
+        </div>
+
+        <div class="clause">
+          <h3>8. Припинення дії та примітка про локалізації</h3>
+          <p>У разі порушення умов цієї Угоди (особливо розділу 4) ліцензія автоматично припиняється, а всі копії Застосунку підлягають негайному видаленню.</p>
+          <p><strong>Про локалізації та машинний переклад:</strong> офіційними локалізаціями, що підтримуються безпосередньо Розробником, є <strong>українська (<span class="mono">uk</span>)</strong>, <strong>російська (<span class="mono">ru</span>)</strong> та <strong>англійська США (<span class="mono">en-US</span>)</strong>, а також будь-яка майбутня локалізація із зазначенням конкретного автора перекладу. Інші вбудовані локалізації (німецька, іспанська, французька, португальська, японська, китайська спрощена та традиційна) створені за допомогою машинного перекладу й можуть містити неточності або помилки &mdash; ми щиро перепрошуємо за можливі недоліки перекладу.</p>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>&copy; 2026 Serhiy Yuzchyshyn (#Gr3y). All rights reserved.</div>
+      <div><a href="./index.html">AeBRen Home</a> &middot; <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a></div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var navText = {
+        en: { home: 'Home', privacy: 'Privacy Policy', eula: 'Terms (EULA)', contact: 'Contact', back: 'App Overview' },
+        ru: { home: 'Главная', privacy: 'Конфиденциальность', eula: 'Условия (EULA)', contact: 'Контакты', back: 'О приложении' },
+        uk: { home: 'Головна', privacy: 'Конфіденційність', eula: 'Умови (EULA)', contact: 'Контакти', back: 'Про застосунок' }
+      };
+      var partText = {
+        en: { all: 'Full Document', privacy: 'Privacy Policy', eula: 'Terms (EULA)' },
+        ru: { all: 'Весь документ', privacy: 'Политика', eula: 'Условия (EULA)' },
+        uk: { all: 'Увесь документ', privacy: 'Політика', eula: 'Умови (EULA)' }
+      };
+      var titles = {
+        en: 'Privacy Policy & Terms of Use (EULA) — AeBRen',
+        ru: 'Политика конфиденциальности и Условия (EULA) — AeBRen',
+        uk: 'Політика конфіденційності та Умови (EULA) — AeBRen'
+      };
+
+      var validLang = { en: true, ru: true, uk: true };
+      var validPart = { all: true, privacy: true, eula: true };
+      var articles = document.querySelectorAll('article[data-lang]');
+      var langBtns = document.querySelectorAll('[data-lang-btn]');
+      var partBtns = document.querySelectorAll('[data-part-btn]');
+      var navEls = document.querySelectorAll('[data-i18n-nav]');
+      var partLabels = document.querySelectorAll('[data-i18n-part]');
+
+      var activeLang = 'en';
+      var activePart = 'all';
+
+      function render(persist) {
+        document.documentElement.lang = activeLang;
+        document.title = titles[activeLang];
+
+        articles.forEach(function (art) {
+          var isLang = art.getAttribute('data-lang') === activeLang;
+          art.hidden = !isLang;
+          if (isLang) {
+            art.querySelectorAll('[data-part]').forEach(function (sec) {
+              sec.hidden = activePart !== 'all' && sec.getAttribute('data-part') !== activePart;
+            });
+          }
+        });
+
+        langBtns.forEach(function (btn) {
+          btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === activeLang ? 'true' : 'false');
+        });
+        partBtns.forEach(function (btn) {
+          btn.setAttribute('aria-pressed', btn.getAttribute('data-part-btn') === activePart ? 'true' : 'false');
+        });
+        navEls.forEach(function (el) {
+          var k = el.getAttribute('data-i18n-nav');
+          if (navText[activeLang] && navText[activeLang][k]) {
+            el.textContent = navText[activeLang][k];
+          }
+          if (k === 'home' || k === 'back') {
+            el.setAttribute('href', activeLang === 'en' ? './index.html' : './index.html?lang=' + activeLang);
+          }
+        });
+        partLabels.forEach(function (el) {
+          var k = el.getAttribute('data-i18n-part');
+          if (partText[activeLang] && partText[activeLang][k]) {
+            el.textContent = partText[activeLang][k];
+          }
+        });
+
+        if (persist) {
+          try { localStorage.setItem('aebren_site_lang', activeLang); } catch (_) {}
+        }
+      }
+
+      langBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var next = btn.getAttribute('data-lang-btn');
+          if (validLang[next]) {
+            activeLang = next;
+            render(true);
+          }
+        });
+      });
+
+      partBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var next = btn.getAttribute('data-part-btn');
+          if (validPart[next]) {
+            activePart = next;
+            render(false);
+          }
+        });
+      });
+
+      document.querySelectorAll('a[href="#part-privacy"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          activePart = 'privacy';
+          render(false);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      document.querySelectorAll('a[href="#part-eula"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          activePart = 'eula';
+          render(false);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      var params = new URLSearchParams(window.location.search);
+      var urlLang = (params.get('lang') || '').toLowerCase();
+      var urlPart = (params.get('part') || '').toLowerCase();
+      var saved = '';
+      try { saved = localStorage.getItem('aebren_site_lang') || ''; } catch (_) {}
+      activeLang = validLang[urlLang] ? urlLang : (validLang[saved] ? saved : 'en');
+      activePart = validPart[urlPart] ? urlPart : 'all';
+      render(false);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeBRen — Offline eBook File Manager &amp; Batch Renamer</title>
+  <meta name="description" content="Offline Android file manager, embedded metadata editor, and conditional batch renamer for local e-book libraries (FB2, FB3, EPUB, KEPUB, MOBI, AZW3, KFX, PDF, DjVu, Markdown)." />
+  <meta property="og:title" content="AeBRen — Offline eBook File Manager &amp; Batch Renamer" />
+  <meta property="og:description" content="Organize local e-book collections on Android with an offline file manager, in-place metadata editing, and conditional template renaming." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface-subtle: #edf1f7;
+      --border: rgba(15, 23, 42, 0.09);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text: #111827;
+      --text-secondary: #374151;
+      --text-muted: #5b667a;
+      --accent: #059669;
+      --accent-hover: #047857;
+      --accent-soft: rgba(5, 150, 105, 0.1);
+      --accent-fg: #ffffff;
+      --code-bg: #eef2f7;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 7px;
+      --max-w: 1080px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #181c24;
+        --surface: #202530;
+        --surface-subtle: #272d3a;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.16);
+        --text: #eef2f7;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --accent: #10b981;
+        --accent-hover: #059669;
+        --accent-soft: rgba(16, 185, 129, 0.14);
+        --accent-fg: #052e22;
+        --code-bg: #141820;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      letter-spacing: 0.005em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Bar Contract: 3 zones, single row */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      height: 64px;
+    }
+
+    .brand {
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.925rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a {
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding: 6px 0;
+      transition: color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      background-color: var(--accent);
+      color: var(--accent-fg);
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .header-cta:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .header-cta:active {
+      transform: scale(0.98);
+    }
+
+    /* Language toolbar inside main below header */
+    .lang-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 24px 0 0;
+    }
+
+    .meta-line {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .segmented {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      background-color: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .segmented button {
+      min-height: 36px;
+      padding: 6px 14px;
+      border: 0;
+      border-radius: calc(var(--radius-md) - 4px);
+      background: transparent;
+      color: var(--text-secondary);
+      font: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), color 150ms ease;
+    }
+
+    .segmented button:hover {
+      color: var(--text);
+    }
+
+    .segmented button[aria-pressed="true"] {
+      background-color: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 44px 0 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.15rem, 3.8vw, 3.25rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .hero-lead {
+      margin: 0 0 28px;
+      max-width: 58ch;
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 22px;
+      border-radius: var(--radius-sm);
+      background-color: var(--accent);
+      color: var(--accent-fg);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: border-color 160ms ease, background-color 160ms ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--surface-subtle);
+    }
+
+    /* Example preview card in hero right column */
+    .preview-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .preview-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin: 0 0 12px;
+    }
+
+    .code-block {
+      margin: 0 0 18px;
+      padding: 14px 16px;
+      background-color: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8125rem;
+      line-height: 1.55;
+      color: var(--text);
+      overflow-x: auto;
+    }
+
+    .rename-sample {
+      display: grid;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8125rem;
+    }
+
+    .rename-before {
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .rename-after {
+      color: var(--accent);
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    /* Fact strip below hero */
+    .fact-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .fact-item dt {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .fact-item dd {
+      margin: 0;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Sections */
+    .section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-head {
+      max-width: 68ch;
+      margin-bottom: 32px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.45rem, 2.3vw, 2rem);
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    /* Asymmetric capabilities bento */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .cap-card {
+      padding: 24px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .cap-wide { grid-column: span 7; }
+    .cap-narrow { grid-column: span 5; }
+    .cap-half { grid-column: span 6; }
+
+    .cap-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.0625rem;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .cap-card p {
+      margin: 0;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+    }
+
+    /* Format table */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .spec-table th,
+    .spec-table td {
+      text-align: left;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9375rem;
+      vertical-align: top;
+    }
+
+    .spec-table tr:last-child th,
+    .spec-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .spec-table th {
+      width: 28%;
+      font-weight: 600;
+      color: var(--text);
+      background-color: var(--surface-subtle);
+    }
+
+    .spec-table td {
+      color: var(--text-secondary);
+    }
+
+    .mono {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.875rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Privacy summary split */
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .clean-list {
+      margin: 0;
+      padding: 0 0 0 20px;
+      color: var(--text-secondary);
+    }
+
+    .clean-list li {
+      margin-bottom: 10px;
+    }
+
+    .contact-panel {
+      padding: 24px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .contact-panel h3 {
+      margin: 0 0 12px;
+      font-size: 1.0625rem;
+    }
+
+    .contact-panel p {
+      margin: 0 0 14px;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-link {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 32px 0 44px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .privacy-grid {
+        grid-template-columns: 1fr;
+      }
+      .fact-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .cap-wide,
+      .cap-narrow,
+      .cap-half {
+        grid-column: span 12;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        padding: 0 16px;
+      }
+      .header-inner {
+        gap: 16px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .spec-table th,
+      .spec-table td {
+        display: block;
+        width: 100%;
+      }
+      .spec-table th {
+        padding-bottom: 6px;
+        border-bottom: 0;
+      }
+      .spec-table td {
+        padding-top: 6px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html">AeBRen</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#features" data-i18n-nav="features">Features</a>
+        <a href="#formats" data-i18n-nav="formats">Formats</a>
+        <a href="#privacy" data-i18n-nav="privacy">Privacy</a>
+        <a href="#contact" data-i18n-nav="contact">Contact</a>
+      </nav>
+      <a class="header-cta" href="./privacy.html" data-i18n-nav="cta">Privacy Policy</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="lang-bar">
+      <div class="meta-line">
+        <span>#Gr3y&#39;s Advanced eBook ReNamer</span>
+        <span aria-hidden="true"> &middot; </span>
+        <span class="mono">com.aebren.app</span>
+        <span aria-hidden="true"> &middot; </span>
+        <span>Android 7.0+ (API 24&ndash;36)</span>
+      </div>
+      <div class="segmented" role="group" aria-label="Language selector">
+        <button type="button" data-lang-btn="en" aria-pressed="true">English</button>
+        <button type="button" data-lang-btn="ru" aria-pressed="false">Русский</button>
+        <button type="button" data-lang-btn="uk" aria-pressed="false">Українська</button>
+      </div>
+    </div>
+
+    <!-- ENGLISH CONTENT (Default static HTML for crawlers & visitors) -->
+    <div data-lang="en">
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <h1>Offline e-book file manager, metadata editor, and batch renamer for Android</h1>
+            <p class="hero-lead">
+              AeBRen organizes local e-book collections directly on your device. Browse folders across shared storage, inspect and edit embedded book tags in-place, and rename files using conditional templates without uploading your library to any server.
+            </p>
+            <div class="hero-actions">
+              <a class="btn-primary" href="./privacy.html">Read Privacy Policy &amp; Terms</a>
+              <a class="btn-secondary" href="mailto:gr8gr3y@gmail.com">Contact Developer</a>
+            </div>
+          </div>
+
+          <aside class="preview-panel" aria-label="Template renaming example">
+            <div>
+              <p class="preview-label">Conditional template example</p>
+              <pre class="code-block">{author} - if({series}, "[{series} {series_num}] ", ""){title}</pre>
+            </div>
+            <div class="rename-sample">
+              <div class="rename-before">download_book_0491_final.fb2.zip</div>
+              <div class="rename-after">Frank Herbert - [Dune 01] Dune.fb2.zip</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <dl class="fact-strip">
+        <div class="fact-item">
+          <dt>Processing model</dt>
+          <dd>100% On-Device</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Supported book formats</dt>
+          <dd>11+ Formats &amp; ZIP</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Interface languages</dt>
+          <dd>10 Localizations</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Current release</dt>
+          <dd class="mono">v1.0.0</dd>
+        </div>
+      </dl>
+
+      <section class="section" id="features" data-section="features">
+        <div class="section-head">
+          <h2>Core capabilities for local e-book libraries</h2>
+          <p>Designed around direct Android filesystem workflows for readers who maintain structured personal libraries across multiple folders and reading apps.</p>
+        </div>
+        <div class="bento">
+          <article class="cap-card cap-wide">
+            <h3>01. Built-in Android File Manager &amp; Multi-Folder Queue</h3>
+            <p>Browse internal shared storage and SD directories, bookmark favorite library folders, create subfolders, copy or move files with per-conflict prompts, and collect e-books from multiple locations into a single batch processing list.</p>
+          </article>
+          <article class="cap-card cap-narrow">
+            <h3>02. In-Place Metadata &amp; Cover Editing</h3>
+            <p>Read and update title, authors, series, sequence number, year, publisher, ISBN, language, and genres directly inside FB2, FB3, EPUB, KEPUB, MOBI, AZW3, unencrypted AZW8/KFX, PDF, and Markdown files.</p>
+          </article>
+          <article class="cap-card cap-half">
+            <h3>03. Conditional if() Templates &amp; Regex Rules</h3>
+            <p>Build custom filename and directory templates with nested conditional expressions, automatic zero-padding for series numbers, transliteration, case normalization, and regular expression cleanup rules.</p>
+          </article>
+          <article class="cap-card cap-half">
+            <h3>04. Android Share Integration &amp; Tablet Layout</h3>
+            <p>Send single files, multiple books, or entire folders directly into AeBRen from any Android file manager via the system Share menu, with an adaptive two-pane layout on tablets.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="formats" data-section="formats">
+        <div class="section-head">
+          <h2>Supported formats &amp; editions</h2>
+          <p>AeBRen never cracks or removes DRM; DRM-protected files are automatically skipped or kept read-only.</p>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr>
+              <th scope="row">Read &amp; write metadata</th>
+              <td class="mono">FB2, FB3, EPUB 2/3, KEPUB, MOBI, AZW / AZW3, AZW8 / KFX (unencrypted), PDF, Markdown (YAML), *.fb2.zip / *.zip</td>
+            </tr>
+            <tr>
+              <th scope="row">Read-only metadata</th>
+              <td class="mono">DjVu</td>
+            </tr>
+            <tr>
+              <th scope="row">Free Tier</th>
+              <td>Ad-supported via Google AdMob (with Google UMP consent), up to 20 renamed files per day, built-in file manager, metadata editor, light Soft-Touch themes, and core renaming templates.</td>
+            </tr>
+            <tr>
+              <th scope="row">Pro Access (in-app)</th>
+              <td>Removes ads and daily limits; adds dark &amp; light Soft-Touch themes, extended template tags, automatic folder cataloging, book content &amp; PDF metadata helper (text/region selection, fragment OCR, open bibliographic lookup), cover replacement, and JSON settings backup.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="privacy" data-section="privacy">
+        <div class="privacy-grid">
+          <div>
+            <div class="section-head" style="margin-bottom: 18px;">
+              <h2>Local-first privacy by design</h2>
+              <p>Your books, folder paths, annotations, and covers stay strictly on your Android device.</p>
+            </div>
+            <ul class="clean-list">
+              <li>No user accounts, sign-in walls, or developer cloud servers storing your library.</li>
+              <li>Storage permissions are used exclusively upon your action to browse directories, read metadata, and rename or update local files.</li>
+              <li>In the Free tier, Google Mobile Ads SDK (AdMob) and Google UMP SDK are used solely for ad delivery and regional privacy consent (GDPR/CCPA).</li>
+            </ul>
+            <p style="margin-top: 20px;">
+              <a class="contact-link" href="./privacy.html">Open full Terms of Use (EULA) &amp; Privacy Policy</a>
+            </p>
+          </div>
+
+          <aside class="contact-panel" id="contact" data-section="contact">
+            <h3>Developer &amp; Support</h3>
+            <p>
+              <strong>Serhiy Yuzchyshyn (#Gr3y)</strong><br />
+              Package ID: <span class="mono">com.aebren.app</span>
+            </p>
+            <p>For technical support, bug reports, localization contributions, or legal and privacy inquiries:</p>
+            <p style="margin-bottom: 0;">
+              <a class="contact-link" href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>
+            </p>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <!-- RUSSIAN CONTENT -->
+    <div data-lang="ru" hidden>
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <h1>Офлайн файл-менеджер, редактор метаданных и пакетный переименователь книг для Android</h1>
+            <p class="hero-lead">
+              AeBRen наводит порядок в локальных библиотеках электронных книг прямо на вашем устройстве. Управляйте папками на накопителе, редактируйте встроенные теги книг на месте и переименовывайте файлы по условным шаблонам без загрузки библиотеки на сторонние серверы.
+            </p>
+            <div class="hero-actions">
+              <a class="btn-primary" href="./privacy.html?lang=ru">Политика конфиденциальности и EULA</a>
+              <a class="btn-secondary" href="mailto:gr8gr3y@gmail.com">Связаться с разработчиком</a>
+            </div>
+          </div>
+
+          <aside class="preview-panel" aria-label="Пример шаблона переименования">
+            <div>
+              <p class="preview-label">Пример условного шаблона</p>
+              <pre class="code-block">{author} - if({series}, "[{series} {series_num}] ", ""){title}</pre>
+            </div>
+            <div class="rename-sample">
+              <div class="rename-before">download_book_0491_final.fb2.zip</div>
+              <div class="rename-after">Фрэнк Герберт - [Дюна 01] Дюна.fb2.zip</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <dl class="fact-strip">
+        <div class="fact-item">
+          <dt>Обработка данных</dt>
+          <dd>100% на устройстве</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Форматы книг</dt>
+          <dd>11+ форматов и ZIP</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Языки интерфейса</dt>
+          <dd>10 локализаций</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Актуальная версия</dt>
+          <dd class="mono">v1.0.0</dd>
+        </div>
+      </dl>
+
+      <section class="section" data-section="features">
+        <div class="section-head">
+          <h2>Основные возможности для локальных библиотек</h2>
+          <p>Спроектировано для прямой работы с файловой системой Android и поддержания порядка в больших коллекциях книг из разных папок и читалок.</p>
+        </div>
+        <div class="bento">
+          <article class="cap-card cap-wide">
+            <h3>01. Встроенный файл-менеджер и общая очередь обработки</h3>
+            <p>Навигация по внутренней памяти и каталогам, избранные папки, создание подпапок, копирование и перемещение с гибким разрешением конфликтов и сбор книг из разных директорий в единый список.</p>
+          </article>
+          <article class="cap-card cap-narrow">
+            <h3>02. Редактирование метаданных и обложек на месте</h3>
+            <p>Чтение и запись названия, авторов, серии, номера в серии, года, издательства, ISBN, языка и жанров внутри FB2, FB3, EPUB, KEPUB, MOBI, AZW3, незашифрованных AZW8/KFX, PDF и Markdown.</p>
+          </article>
+          <article class="cap-card cap-half">
+            <h3>03. Условные шаблоны if() и правила RegEx</h3>
+            <p>Конструктор формул с вложенными условиями, автоматическое дополнение номеров серий нулями, транслитерация, нормализация регистра и пользовательские регулярные выражения.</p>
+          </article>
+          <article class="cap-card cap-half">
+            <h3>04. Системное меню «Поделиться» и режим планшета</h3>
+            <p>Отправляйте отдельные файлы, группы книг или целые папки в AeBRen из любого проводника Android, а на планшетах работайте в адаптивном двухпанельном интерфейсе.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-section="formats">
+        <div class="section-head">
+          <h2>Поддерживаемые форматы и редакции</h2>
+          <p>AeBRen не взламывает и не снимает DRM-защиту — защищённые файлы пропускаются или остаются в режиме «только чтение».</p>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr>
+              <th scope="row">Чтение и запись метаданных</th>
+              <td class="mono">FB2, FB3, EPUB 2/3, KEPUB, MOBI, AZW / AZW3, AZW8 / KFX (без DRM), PDF, Markdown (YAML), *.fb2.zip / *.zip</td>
+            </tr>
+            <tr>
+              <th scope="row">Только чтение метаданных</th>
+              <td class="mono">DjVu</td>
+            </tr>
+            <tr>
+              <th scope="row">Бесплатный режим (Free)</th>
+              <td>Поддержка рекламы Google AdMob (с формой согласия Google UMP), лимит 20 переименований в день, встроенный файл-менеджер, редактор метаданных, светлые темы Soft-Touch и базовые теги шаблонов.</td>
+            </tr>
+            <tr>
+              <th scope="row">Pro-доступ (внутри приложения)</th>
+              <td>Отключает рекламу и лимиты; открывает тёмные и светлые темы, расширенные теги, автосортировку по папкам, помощник метаданных книг и PDF (текстовое/графическое выделение, OCR фрагмента, открытые каталоги), замену обложек и бэкап настроек JSON.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" data-section="privacy">
+        <div class="privacy-grid">
+          <div>
+            <div class="section-head" style="margin-bottom: 18px;">
+              <h2>Приватность Local-First</h2>
+              <p>Ваши книги, пути папок, аннотации и обложки обрабатываются строго на вашем устройстве.</p>
+            </div>
+            <ul class="clean-list">
+              <li>Без регистрации аккаунтов и без загрузки ваших книг на серверы разработчика.</li>
+              <li>Доступ к хранилищу используется только по вашей команде для обзора папок, чтения тегов и переименования или сохранения файлов на месте.</li>
+              <li>В бесплатной версии Google Mobile Ads SDK (AdMob) и Google UMP SDK применяются исключительно для показа рекламы и запроса регионального согласия (GDPR/CCPA).</li>
+            </ul>
+            <p style="margin-top: 20px;">
+              <a class="contact-link" href="./privacy.html?lang=ru">Открыть полные Условия использования (EULA) и Политику конфиденциальности</a>
+            </p>
+          </div>
+
+          <aside class="contact-panel" data-section="contact">
+            <h3>Разработчик и поддержка</h3>
+            <p>
+              <strong>Serhiy Yuzchyshyn (#Gr3y)</strong><br />
+              ID пакета: <span class="mono">com.aebren.app</span>
+            </p>
+            <p>По вопросам работы приложения, отчётам об ошибках, переводам, лицензированию и конфиденциальности:</p>
+            <p style="margin-bottom: 0;">
+              <a class="contact-link" href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>
+            </p>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <!-- UKRAINIAN CONTENT -->
+    <div data-lang="uk" hidden>
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <h1>Офлайн файл-менеджер, редактор метаданих і пакетний перейменовувач книг для Android</h1>
+            <p class="hero-lead">
+              AeBRen впорядковує локальні бібліотеки електронних книг безпосередньо на вашому пристрої. Керуйте теками у сховищі, редагуйте вбудовані теги книг на місці та перейменовуйте файли за умовними шаблонами без завантаження бібліотеки на сторонні сервери.
+            </p>
+            <div class="hero-actions">
+              <a class="btn-primary" href="./privacy.html?lang=uk">Політика конфіденційності та EULA</a>
+              <a class="btn-secondary" href="mailto:gr8gr3y@gmail.com">Зв&#39;язатися з розробником</a>
+            </div>
+          </div>
+
+          <aside class="preview-panel" aria-label="Приклад шаблону перейменування">
+            <div>
+              <p class="preview-label">Приклад умовного шаблону</p>
+              <pre class="code-block">{author} - if({series}, "[{series} {series_num}] ", ""){title}</pre>
+            </div>
+            <div class="rename-sample">
+              <div class="rename-before">download_book_0491_final.fb2.zip</div>
+              <div class="rename-after">Френк Герберт - [Дюна 01] Дюна.fb2.zip</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <dl class="fact-strip">
+        <div class="fact-item">
+          <dt>Обробка даних</dt>
+          <dd>100% на пристрої</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Формати книг</dt>
+          <dd>11+ форматів і ZIP</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Мови інтерфейсу</dt>
+          <dd>10 локалізацій</dd>
+        </div>
+        <div class="fact-item">
+          <dt>Поточна версія</dt>
+          <dd class="mono">v1.0.0</dd>
+        </div>
+      </dl>
+
+      <section class="section" data-section="features">
+        <div class="section-head">
+          <h2>Основні можливості для локальних бібліотек</h2>
+          <p>Створено для прямої роботи з файловою системою Android і підтримання ладу у великих колекціях книг із різних тек і читалок.</p>
+        </div>
+        <div class="bento">
+          <article class="cap-card cap-wide">
+            <h3>01. Вбудований файл-менеджер і спільна черга обробки</h3>
+            <p>Навігація внутрішньою пам&#39;яттю й каталогами, обрані теки, створення підтек, копіювання та переміщення з гнучким вирішенням конфліктів і збір книг із різних директорій в один список.</p>
+          </article>
+          <article class="cap-card cap-narrow">
+            <h3>02. Редагування метаданих і обкладинок на місці</h3>
+            <p>Читання та запис назви, авторів, серії, номера в серії, року, видавництва, ISBN, мови й жанрів усередині FB2, FB3, EPUB, KEPUB, MOBI, AZW3, незашифрованих AZW8/KFX, PDF та Markdown.</p>
+          </article>
+          <article class="cap-card cap-half">
+            <h3>03. Умовні шаблони if() і правила RegEx</h3>
+            <p>Конструктор формул із вкладеними умовами, автоматичне додавання провідних нулів до номерів серій, транслітерація, нормалізація регістру та власні регулярні вирази.</p>
+          </article>
+          <article class="cap-card cap-half">
+            <h3>04. Системне меню «Поділитися» і режим планшета</h3>
+            <p>Надсилайте окремі файли, добірки книг або цілі теки до AeBRen із будь-якого провідника Android, а на планшетах користуйтеся адаптивним двопанельним інтерфейсом.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-section="formats">
+        <div class="section-head">
+          <h2>Підтримувані формати й редакції</h2>
+          <p>AeBRen не зламує і не знімає DRM-захист — захищені файли пропускаються або залишаються в режимі «лише для читання».</p>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr>
+              <th scope="row">Читання та запис метаданих</th>
+              <td class="mono">FB2, FB3, EPUB 2/3, KEPUB, MOBI, AZW / AZW3, AZW8 / KFX (без DRM), PDF, Markdown (YAML), *.fb2.zip / *.zip</td>
+            </tr>
+            <tr>
+              <th scope="row">Лише читання метаданих</th>
+              <td class="mono">DjVu</td>
+            </tr>
+            <tr>
+              <th scope="row">Безкоштовний режим (Free)</th>
+              <td>Підтримка реклами Google AdMob (із формою згоди Google UMP), ліміт 20 перейменувань на добу, вбудований файл-менеджер, редактор метаданих, світлі теми Soft-Touch і базові теги шаблонів.</td>
+            </tr>
+            <tr>
+              <th scope="row">Pro-доступ (у застосунку)</th>
+              <td>Вимикає рекламу й ліміти; відкриває темні та світлі теми, розширені теги, автосортування в теки, помічник метаданих книг і PDF (текстове/графічне виділення, OCR фрагмента, відкриті каталоги), заміну обкладинок і бекап налаштувань JSON.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" data-section="privacy">
+        <div class="privacy-grid">
+          <div>
+            <div class="section-head" style="margin-bottom: 18px;">
+              <h2>Приватність Local-First</h2>
+              <p>Ваші книги, шляхи тек, анотації та обкладинки обробляються виключно на вашому пристрої.</p>
+            </div>
+            <ul class="clean-list">
+              <li>Без реєстрації облікових записів і без завантаження ваших книг на сервери розробника.</li>
+              <li>Доступ до сховища використовується лише за вашою командою для перегляду тек, читання тегів і перейменування або збереження файлів на місці.</li>
+              <li>У безкоштовній версії Google Mobile Ads SDK (AdMob) і Google UMP SDK використовуються виключно для показу реклами та запиту регіональної згоди (GDPR/CCPA).</li>
+            </ul>
+            <p style="margin-top: 20px;">
+              <a class="contact-link" href="./privacy.html?lang=uk">Відкрити повні Умови використання (EULA) та Політику конфіденційності</a>
+            </p>
+          </div>
+
+          <aside class="contact-panel" data-section="contact">
+            <h3>Розробник і підтримка</h3>
+            <p>
+              <strong>Serhiy Yuzchyshyn (#Gr3y)</strong><br />
+              ID пакета: <span class="mono">com.aebren.app</span>
+            </p>
+            <p>З питань роботи застосунку, повідомлень про помилки, перекладів, ліцензування та конфіденційності:</p>
+            <p style="margin-bottom: 0;">
+              <a class="contact-link" href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>
+            </p>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>&copy; 2026 Serhiy Yuzchyshyn (#Gr3y). All rights reserved.</div>
+      <div class="footer-links">
+        <a href="./privacy.html">Privacy Policy &amp; Terms</a>
+        <a href="mailto:gr8gr3y@gmail.com">gr8gr3y@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var navText = {
+        en: { features: 'Features', formats: 'Formats', privacy: 'Privacy', contact: 'Contact', cta: 'Privacy Policy' },
+        ru: { features: 'Возможности', formats: 'Форматы', privacy: 'Приватность', contact: 'Контакты', cta: 'Политика' },
+        uk: { features: 'Можливості', formats: 'Формати', privacy: 'Приватність', contact: 'Контакти', cta: 'Політика' }
+      };
+      var titles = {
+        en: 'AeBRen — Offline eBook File Manager & Batch Renamer',
+        ru: 'AeBRen — Офлайн файл-менеджер и пакетный переименователь книг',
+        uk: 'AeBRen — Офлайн файл-менеджер і пакетний перейменовувач книг'
+      };
+      var valid = { en: true, ru: true, uk: true };
+      var blocks = document.querySelectorAll('[data-lang]');
+      var buttons = document.querySelectorAll('[data-lang-btn]');
+      var navEls = document.querySelectorAll('[data-i18n-nav]');
+
+      var currentLang = 'en';
+
+      function applyLang(lang, persist) {
+        if (!valid[lang]) lang = 'en';
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        document.title = titles[lang];
+        blocks.forEach(function (el) {
+          el.hidden = el.getAttribute('data-lang') !== lang;
+        });
+        buttons.forEach(function (btn) {
+          btn.setAttribute('aria-pressed', btn.getAttribute('data-lang-btn') === lang ? 'true' : 'false');
+        });
+        navEls.forEach(function (el) {
+          var key = el.getAttribute('data-i18n-nav');
+          if (navText[lang] && navText[lang][key]) {
+            el.textContent = navText[lang][key];
+          }
+          if (key === 'cta') {
+            el.setAttribute('href', lang === 'en' ? './privacy.html' : './privacy.html?lang=' + lang);
+          }
+        });
+        if (persist) {
+          try { localStorage.setItem('aebren_site_lang', lang); } catch (_) {}
+        }
+      }
+
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var sectionKey = (link.getAttribute('href') || '').slice(1);
+          var activeBlock = document.querySelector('[data-lang="' + currentLang + '"]');
+          var target = activeBlock ? activeBlock.querySelector('[data-section="' + sectionKey + '"]') : null;
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyLang(btn.getAttribute('data-lang-btn'), true);
+        });
+      });
+
+      var params = new URLSearchParams(window.location.search);
+      var urlLang = (params.get('lang') || '').toLowerCase();
+      var saved = '';
+      try { saved = localStorage.getItem('aebren_site_lang') || ''; } catch (_) {}
+      var initial = valid[urlLang] ? urlLang : (valid[saved] ? saved : 'en');
+      applyLang(initial, false);
+    })();
+  </script>
+</body>
+</html>
